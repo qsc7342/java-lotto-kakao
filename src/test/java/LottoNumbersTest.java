@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static constant.LottoSetting.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -44,11 +45,10 @@ public class LottoNumbersTest {
     @Test
     void 로또_숫자_개수_검증() {
         // given
-        int expectedSize = 6;
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
 
         // when, then
-        assertThat(lottoNumbers.hasSize(expectedSize)).isTrue();
+        assertThat(lottoNumbers.hasSize(LOTTO_SIZE)).isTrue();
     }
 
     @Test

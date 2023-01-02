@@ -1,10 +1,9 @@
 import java.util.Objects;
 
 import static constant.ExceptionMessage.*;
+import static constant.LottoSetting.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int MIN_VALUE = 1;
-    private static final int MAX_VALUE = 45;
 
     private final int number;
 

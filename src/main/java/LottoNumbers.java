@@ -1,10 +1,13 @@
+import constant.LottoSetting;
+
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static constant.ExceptionMessage.NOT_UNIQUE_LOTTO_NUMBER_MESSAGE;
+import static constant.LottoSetting.*;
 
 public class LottoNumbers {
-    private static final int VALID_LOTTO_NUMBER_COUNT = 6;
-
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -24,7 +27,7 @@ public class LottoNumbers {
                 .distinct()
                 .count();
 
-        if (numberCount != VALID_LOTTO_NUMBER_COUNT) {
+        if (numberCount != LOTTO_SIZE) {
             throw new RuntimeException(NOT_UNIQUE_LOTTO_NUMBER_MESSAGE);
         }
     }
