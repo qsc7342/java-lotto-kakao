@@ -53,6 +53,7 @@ public class LottoNumbersTest {
 
     @Test
     void 로또_숫자열은_오름차순이어야_한다() {
+        // given
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
         LottoNumbers sortedLottoNumbers = new LottoNumbers(List.of(
                 new LottoNumber(5),
@@ -63,7 +64,24 @@ public class LottoNumbersTest {
                 new LottoNumber(41)
         ));
 
+        // then
         assertThat(lottoNumbers).isEqualTo(sortedLottoNumbers);
     }
 
+    @Test
+    void 숫자가가_3개_미만으로_일치하면_아무일도_일어나지_않는다() {
+        // given
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+        LottoNumbers winLottoNumbers = new LottoNumbers(List.of(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        ));
+
+        // when, then
+        assertThat(lottoNumbers.findNumberOfMatch(winLottoNumbers)).isLessThan(3);
+    }
 }

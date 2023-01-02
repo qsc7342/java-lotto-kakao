@@ -1,5 +1,4 @@
-import constant.LottoSetting;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -19,6 +18,13 @@ public class LottoNumbers {
 
     public boolean hasSize(int size) {
         return lottoNumbers.size() == size;
+    }
+
+    public int findNumberOfMatch(LottoNumbers winLottoNumbers) {
+        List<LottoNumber> newLottoNumbers = new ArrayList<>(lottoNumbers);
+
+        newLottoNumbers.retainAll(winLottoNumbers.lottoNumbers);
+        return newLottoNumbers.size();
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
