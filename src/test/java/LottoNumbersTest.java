@@ -1,8 +1,13 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 import static constant.LottoSetting.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -68,39 +73,69 @@ public class LottoNumbersTest {
         assertThat(lottoNumbers).isEqualTo(sortedLottoNumbers);
     }
 
-    @Test
-    void 숫자가_3개_미만으로_일치하면_아무일도_일어나지_않는다() {
+    @ParameterizedTest
+    @MethodSource("provideLottoRank")
+    void 숫자가_3개_미만으로_일치하면_아무일도_일어나지_않는다(LottoNumbers winLottoNumbers, int bonusBall, Rank expected) {
         // given
-        int bonusBall = 28;
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
-        LottoNumbers winLottoNumbers = new LottoNumbers(List.of(
-                new LottoNumber(31),
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(6)
-        ));
 
         // when, then
-        assertThat(lottoNumbers.compareWithWinLottoNumbers(winLottoNumbers, bonusBall)).isEmpty();
+        assertThat(lottoNumbers.compareWithWinLottoNumbers(winLottoNumbers, bonusBall)).isEqualTo(Optional.ofNullable(expected));
     }
 
-    @Test
-    void 숫자가_3개_일치하면_5등에_당첨된다() {
-        // given
-        int bonusBall = 15;
-        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
-        LottoNumbers winLottoNumbers = new LottoNumbers(List.of(
+    private static Stream<Arguments> provideLottoRank() {
+        LottoNumbers firstPlaceLottoNumbers = new LottoNumbers(List.of(
                 new LottoNumber(31),
                 new LottoNumber(18),
                 new LottoNumber(5),
-                new LottoNumber(12),
-                new LottoNumber(45),
-                new LottoNumber(26)
+                new LottoNumber(22),
+                new LottoNumber(41),
+                new LottoNumber(9)
         ));
 
-        // when, then
-        assertThat(lottoNumbers.compareWithWinLottoNumbers(winLottoNumbers, bonusBall).get()).isEqualTo(Rank.FIFTH_PLACE);
+        LottoNumbers secondorThirdPlaceLottoNumbers = new LottoNumbers(List.of(
+                new LottoNumber(31),
+                new LottoNumber(18),
+                new LottoNumber(5),
+                new LottoNumber(22),
+                new LottoNumber(41),
+                new LottoNumber(1)
+        ));
+
+        LottoNumbers fourthPlaceLottoNumbers = new LottoNumbers(List.of(
+                new LottoNumber(31),
+                new LottoNumber(18),
+                new LottoNumber(5),
+                new LottoNumber(22),
+                new LottoNumber(2),
+                new LottoNumber(1)
+        ));
+
+        LottoNumbers fifthPlaceLottoNumbers = new LottoNumbers(List.of(
+                new LottoNumber(31),
+                new LottoNumber(18),
+                new LottoNumber(5),
+                new LottoNumber(3),
+                new LottoNumber(2),
+                new LottoNumber(1)
+        ));
+
+        LottoNumbers noPlaceLottoNumbers = new LottoNumbers(List.of(
+                new LottoNumber(5),
+                new LottoNumber(6),
+                new LottoNumber(4),
+                new LottoNumber(3),
+                new LottoNumber(2),
+                new LottoNumber(1)
+        ));
+
+        return Stream.of(
+                Arguments.arguments(firstPlaceLottoNumbers, 45, Rank.FIRST_PLACE),
+                Arguments.arguments(secondorThirdPlaceLottoNumbers, 9, Rank.SECOND_PLACE),
+                Arguments.arguments(secondorThirdPlaceLottoNumbers, 45, Rank.THIRD_PLACE),
+                Arguments.arguments(fourthPlaceLottoNumbers, 45, Rank.FOURTH_PLACE),
+                Arguments.arguments(fifthPlaceLottoNumbers, 45, Rank.FIFTH_PLACE),
+                Arguments.arguments(noPlaceLottoNumbers, 45, null)
+        );
     }
 }
