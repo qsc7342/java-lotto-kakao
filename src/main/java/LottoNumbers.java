@@ -1,12 +1,16 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static constant.ExceptionMessage.NOT_UNIQUE_LOTTO_NUMBER_MESSAGE;
 import static constant.LottoSetting.*;
 
 public class LottoNumbers {
+
+    private static final int BONUS_BALL_FLAG = 5;
+
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -20,11 +24,16 @@ public class LottoNumbers {
         return lottoNumbers.size() == size;
     }
 
-    public int findNumberOfMatch(LottoNumbers winLottoNumbers) {
-        List<LottoNumber> newLottoNumbers = new ArrayList<>(lottoNumbers);
+    public Optional<Rank> compareWithWinLottoNumbers(LottoNumbers winLottoNumbers, int bonusBall) {
+        List<LottoNumber> matchedLottoNumbers = new ArrayList<>(lottoNumbers);
+        matchedLottoNumbers.retainAll(winLottoNumbers.lottoNumbers);
 
-        newLottoNumbers.retainAll(winLottoNumbers.lottoNumbers);
-        return newLottoNumbers.size();
+        int matchCount = matchedLottoNumbers.size();
+        if(matchCount == BONUS_BALL_FLAG && lottoNumbers.contains(new LottoNumber(bonusBall))) {
+            return Optional.of(Rank.SECOND_PLACE);
+        }
+
+        return Optional.ofNullable(Rank.findRank(matchCount));
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {

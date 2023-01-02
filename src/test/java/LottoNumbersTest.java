@@ -69,19 +69,38 @@ public class LottoNumbersTest {
     }
 
     @Test
-    void 숫자가가_3개_미만으로_일치하면_아무일도_일어나지_않는다() {
+    void 숫자가_3개_미만으로_일치하면_아무일도_일어나지_않는다() {
         // given
+        int bonusBall = 28;
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
         LottoNumbers winLottoNumbers = new LottoNumbers(List.of(
+                new LottoNumber(31),
                 new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
                 new LottoNumber(4),
-                new LottoNumber(5),
                 new LottoNumber(6)
         ));
 
         // when, then
-        assertThat(lottoNumbers.findNumberOfMatch(winLottoNumbers)).isLessThan(3);
+        assertThat(lottoNumbers.compareWithWinLottoNumbers(winLottoNumbers, bonusBall)).isEmpty();
+    }
+
+    @Test
+    void 숫자가_3개_일치하면_5등에_당첨된다() {
+        // given
+        int bonusBall = 15;
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+        LottoNumbers winLottoNumbers = new LottoNumbers(List.of(
+                new LottoNumber(31),
+                new LottoNumber(18),
+                new LottoNumber(5),
+                new LottoNumber(12),
+                new LottoNumber(45),
+                new LottoNumber(26)
+        ));
+
+        // when, then
+        assertThat(lottoNumbers.compareWithWinLottoNumbers(winLottoNumbers, bonusBall).get()).isEqualTo(Rank.FIFTH_PLACE);
     }
 }
