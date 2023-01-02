@@ -2,7 +2,7 @@ import java.util.Objects;
 
 import static constant.ExceptionMessage.*;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_VALUE = 1;
     private static final int MAX_VALUE = 45;
 
@@ -17,6 +17,11 @@ public class LottoNumber {
         if(number < MIN_VALUE || number > MAX_VALUE) {
             throw new RuntimeException(INVALID_LOTTO_NUMBER_MESSAGE);
         }
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return number - other.number;
     }
 
     @Override

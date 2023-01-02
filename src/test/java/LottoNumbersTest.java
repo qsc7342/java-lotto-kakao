@@ -32,7 +32,7 @@ public class LottoNumbersTest {
     }
 
     @Test
-    void 여섯_개의_숫자_중_중복된_숫자가_존재할_경우_예외가_발생한 () {
+    void 여섯_개의_숫자_중_중복된_숫자가_존재할_경우_예외가_발생한다() {
         // given
         lottoNumberList.set(1, new LottoNumber(31));
 
@@ -50,4 +50,20 @@ public class LottoNumbersTest {
         // when, then
         assertThat(lottoNumbers.hasSize(expectedSize)).isTrue();
     }
+
+    @Test
+    void 로또_숫자열은_오름차순이어야_한다() {
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+        LottoNumbers sortedLottoNumbers = new LottoNumbers(List.of(
+                new LottoNumber(5),
+                new LottoNumber(9),
+                new LottoNumber(18),
+                new LottoNumber(22),
+                new LottoNumber(31),
+                new LottoNumber(41)
+        ));
+
+        assertThat(lottoNumbers).isEqualTo(sortedLottoNumbers);
+    }
+
 }

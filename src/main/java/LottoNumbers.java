@@ -9,7 +9,9 @@ public class LottoNumbers {
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = lottoNumbers.stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     public boolean hasSize(int size) {
@@ -25,5 +27,18 @@ public class LottoNumbers {
         if (numberCount != VALID_LOTTO_NUMBER_COUNT) {
             throw new RuntimeException(NOT_UNIQUE_LOTTO_NUMBER_MESSAGE);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }
