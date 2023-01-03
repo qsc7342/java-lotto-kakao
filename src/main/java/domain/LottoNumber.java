@@ -1,3 +1,5 @@
+package domain;
+
 import java.util.Objects;
 
 import static constant.ExceptionMessage.*;
@@ -34,5 +36,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }

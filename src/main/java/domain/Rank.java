@@ -1,3 +1,5 @@
+package domain;
+
 import java.util.Arrays;
 
 public enum Rank {
@@ -19,6 +21,10 @@ public enum Rank {
 
     public long getPrize() {
         return prize;
+    }
+
+    public int getMatchCount() {
+        return matchCount == SECOND_PLACE.matchCount ? THIRD_PLACE.matchCount : matchCount;
     }
 
     public static Rank findRank(int matchCount) {

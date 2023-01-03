@@ -1,3 +1,7 @@
+package utils;
+
+import domain.Rank;
+
 import java.util.Map;
 
 public class YieldCalculator {

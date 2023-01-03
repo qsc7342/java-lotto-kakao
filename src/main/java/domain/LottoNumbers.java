@@ -1,3 +1,5 @@
+package domain;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -58,5 +60,12 @@ public class LottoNumbers {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return '[' + lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(", ")) + ']';
     }
 }

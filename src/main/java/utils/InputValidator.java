@@ -1,3 +1,5 @@
+package utils;
+
 import static constant.ExceptionMessage.INVALID_LOTTO_PAYMENT_MESSAGE;
 import static constant.LottoSetting.MIN_LOTTO_PAYMENT;
 

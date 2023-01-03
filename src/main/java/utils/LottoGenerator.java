@@ -1,3 +1,8 @@
+package utils;
+
+import domain.LottoNumber;
+import domain.LottoNumbers;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
