@@ -1,18 +1,23 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.stream.IntStream;
+
 import static constant.LottoSetting.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGeneratorTest {
+
     @Test
     void generate() {
         // given
-        LottoGenerator lottoGenerator = new LottoGenerator();
+        int payment = 14000;
 
         // when
-        LottoNumbers lottoNumbers = lottoGenerator.generate();
+        List<LottoNumbers> lottoNumbers = LottoGenerator.generateLotto(payment);
 
         // then
-        assertThat(lottoNumbers.hasSize(LOTTO_SIZE)).isEqualTo(true);
+        IntStream.range(0, payment / LOTTO_PRICE)
+                .forEach(idx -> assertThat(lottoNumbers.get(idx).hasSize(LOTTO_SIZE)).isTrue());
     }
 }

@@ -75,7 +75,7 @@ public class LottoNumbersTest {
 
     @ParameterizedTest
     @MethodSource("provideLottoRank")
-    void 숫자가_3개_미만으로_일치하면_아무일도_일어나지_않는다(LottoNumbers winLottoNumbers, int bonusBall, Rank expected) {
+    void 숫자가_3개_미만으로_일치하면_아무일도_일어나지_않는다(LottoNumbers winLottoNumbers, LottoNumber bonusBall, Rank expected) {
         // given
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
 
@@ -130,12 +130,12 @@ public class LottoNumbersTest {
         ));
 
         return Stream.of(
-                Arguments.arguments(firstPlaceLottoNumbers, 45, Rank.FIRST_PLACE),
-                Arguments.arguments(secondorThirdPlaceLottoNumbers, 9, Rank.SECOND_PLACE),
-                Arguments.arguments(secondorThirdPlaceLottoNumbers, 45, Rank.THIRD_PLACE),
-                Arguments.arguments(fourthPlaceLottoNumbers, 45, Rank.FOURTH_PLACE),
-                Arguments.arguments(fifthPlaceLottoNumbers, 45, Rank.FIFTH_PLACE),
-                Arguments.arguments(noPlaceLottoNumbers, 45, null)
+                Arguments.arguments(firstPlaceLottoNumbers, new LottoNumber(45), Rank.FIRST_PLACE),
+                Arguments.arguments(secondorThirdPlaceLottoNumbers, new LottoNumber(9), Rank.SECOND_PLACE),
+                Arguments.arguments(secondorThirdPlaceLottoNumbers, new LottoNumber(45), Rank.THIRD_PLACE),
+                Arguments.arguments(fourthPlaceLottoNumbers, new LottoNumber(45), Rank.FOURTH_PLACE),
+                Arguments.arguments(fifthPlaceLottoNumbers, new LottoNumber(45), Rank.FIFTH_PLACE),
+                Arguments.arguments(noPlaceLottoNumbers, new LottoNumber(45), null)
         );
     }
 }

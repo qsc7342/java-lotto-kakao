@@ -11,7 +11,14 @@ public class LottoGenerator {
             .boxed()
             .collect(Collectors.toList());
 
-    public static LottoNumbers generate() {
+
+    public static List<LottoNumbers> generateLotto(int payment) {
+        return IntStream.range(0, payment / LOTTO_PRICE)
+                .mapToObj(i -> generate())
+                .collect(Collectors.toList());
+    }
+
+    private static LottoNumbers generate() {
         Collections.shuffle(LOTTO_NUMBER_LIST);
 
         return new LottoNumbers(

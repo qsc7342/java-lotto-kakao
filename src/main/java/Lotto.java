@@ -1,23 +1,25 @@
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import static constant.LottoSetting.LOTTO_PRICE;
 
 public class Lotto {
 
     private final Payment payment;
     private List<LottoNumbers> lottoNumbersList;
 
-    public Lotto(int payment) {
+    public Lotto(int payment, List<LottoNumbers> lottoNumbersList) {
         this.payment = new Payment(payment);
-        this.lottoNumbersList = createLottoNumbersForPayment(payment);
+        this.lottoNumbersList = lottoNumbersList;
     }
 
-    private List<LottoNumbers> createLottoNumbersForPayment(int payment) {
-        return IntStream.range(0, payment / LOTTO_PRICE)
-                .mapToObj(i -> LottoGenerator.generate())
+    public Map<Rank, Integer> rankEachLotto(LottoNumbers winLottoNumbers, LottoNumber bonusBall) {
+        List<Rank> ranks = lottoNumbersList.stream()
+                .map(lottoNumbers -> lottoNumbers.compareWithWinLottoNumbers(winLottoNumbers, bonusBall))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
                 .collect(Collectors.toList());
+
+        return Arrays.stream(Rank.values())
+                        .collect(Collectors.toMap(rank -> rank, rank -> Collections.frequency(ranks, rank)));
     }
 
 }

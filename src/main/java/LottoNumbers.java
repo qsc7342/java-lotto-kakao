@@ -24,12 +24,12 @@ public class LottoNumbers {
         return lottoNumbers.size() == size;
     }
 
-    public Optional<Rank> compareWithWinLottoNumbers(LottoNumbers winLottoNumbers, int bonusBall) {
+    public Optional<Rank> compareWithWinLottoNumbers(LottoNumbers winLottoNumbers, LottoNumber bonusBall) {
         List<LottoNumber> matchedLottoNumbers = new ArrayList<>(lottoNumbers);
         matchedLottoNumbers.retainAll(winLottoNumbers.lottoNumbers);
 
         int matchCount = matchedLottoNumbers.size();
-        if(matchCount == BONUS_BALL_FLAG && lottoNumbers.contains(new LottoNumber(bonusBall))) {
+        if(matchCount == BONUS_BALL_FLAG && lottoNumbers.contains(bonusBall)) {
             return Optional.of(Rank.SECOND_PLACE);
         }
 
