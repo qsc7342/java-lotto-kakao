@@ -10,11 +10,15 @@ public enum Rank {
     ;
 
     private int matchCount;
-    private int prize;
+    private long prize;
 
     Rank(int matchCount, int prize) {
         this.matchCount = matchCount;
         this.prize = prize;
+    }
+
+    public long getPrize() {
+        return prize;
     }
 
     public static Rank findRank(int matchCount) {

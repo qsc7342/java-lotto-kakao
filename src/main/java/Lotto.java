@@ -3,11 +3,9 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private final Payment payment;
     private List<LottoNumbers> lottoNumbersList;
 
-    public Lotto(int payment, List<LottoNumbers> lottoNumbersList) {
-        this.payment = new Payment(payment);
+    public Lotto(List<LottoNumbers> lottoNumbersList) {
         this.lottoNumbersList = lottoNumbersList;
     }
 

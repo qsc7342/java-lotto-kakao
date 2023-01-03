@@ -17,7 +17,7 @@ public class LottoTest {
     @MethodSource("provideLotto")
     void 로또_당첨_등수를_계산한다(List<LottoNumbers> lottoNumbersList, LottoNumber bonusBall, List<Integer> expectedRankCountList) {
         // given
-        Lotto lotto = new Lotto(lottoNumbersList.size() * LOTTO_PRICE, lottoNumbersList);
+        Lotto lotto = new Lotto(lottoNumbersList);
         LottoNumbers winLottoNumbers = new LottoNumbers(List.of(
                 new LottoNumber(31),
                 new LottoNumber(18),
