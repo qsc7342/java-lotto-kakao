@@ -1,17 +1,25 @@
 package domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import static constant.ExceptionMessage.*;
 import static constant.LottoSetting.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-
     private final int number;
-
-    public LottoNumber(int number) {
+    private static final Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
+    private LottoNumber(int number) {
         validateNumber(number);
         this.number = number;
+    }
+
+    public static LottoNumber of(int number) {
+        if (lottoNumberCache.containsKey(number)) {
+            lottoNumberCache.put(number, new LottoNumber(number));
+        }
+        return lottoNumberCache.get(number);
     }
 
     private void validateNumber(int number) {
