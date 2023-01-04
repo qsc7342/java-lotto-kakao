@@ -12,12 +12,10 @@ import view.InputView;
 import view.OutputView;
 import view.PurchasedInfo;
 import view.WinningStatistics;
-import utils.LottoGenerator;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static constant.LottoSetting.LOTTO_PRICE;
 import static utils.LottoGenerator.*;
@@ -60,12 +58,12 @@ public class LottoController {
     private List<LottoNumbers> purchaseManualLotto(int count) {
         return inputView.getUserInputManualLottoNumbers(count)
                 .stream()
-                .map(LottoStringUtils::stringToLottoNumbers)
+                .map(LottoStringUtils::stringWithDelimiterToLottoNumbers)
                 .collect(Collectors.toList());
     }
 
     private LottoNumbers getWinLottoNumbersFromUser() {
-        return stringToLottoNumbers(inputView.getUserInputLottoNumbers());
+        return stringWithDelimiterToLottoNumbers(inputView.getUserInputLottoNumbers());
     }
 
     private LottoNumber getBonusBallFromUser() {
