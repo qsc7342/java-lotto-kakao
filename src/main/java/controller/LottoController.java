@@ -6,6 +6,7 @@ import domain.lotto.LottoNumbers;
 import domain.lotto.WinningLotto;
 import domain.payment.Payment;
 import domain.rank.Rank;
+import utils.LottoStringUtils;
 import utils.YieldCalculator;
 import view.InputView;
 import view.OutputView;
@@ -13,16 +14,16 @@ import view.PurchasedInfo;
 import view.WinningStatistics;
 import utils.LottoGenerator;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static constant.LottoSetting.LOTTO_PRICE;
+import static utils.LottoGenerator.*;
+import static utils.LottoStringUtils.*;
 
 public class LottoController {
-    private static final String LOTTO_NUMBER_DELIMITER = ", ";
-
     private final InputView inputView;
     private final OutputView outputView;
 
@@ -44,20 +45,27 @@ public class LottoController {
     }
 
     private List<LottoNumbers> purchaseLotto(Payment payment) {
-        int numberOfLotto = payment.getDivideByInt(LOTTO_PRICE);
-        outputView.printNumberOfLotto(numberOfLotto);
+        int numberOfManualLotto = Integer.parseInt(inputView.getUserInputManualLottoCount());
+        int numberOfAutomaticLotto = payment.getSubtractByInt(numberOfManualLotto * LOTTO_PRICE) / LOTTO_PRICE;
+        outputView.printNumberOfLotto(numberOfManualLotto, numberOfAutomaticLotto);
 
-        List<LottoNumbers> lottoNumbersList = LottoGenerator.generateLotto(numberOfLotto);
+        List<LottoNumbers> lottoNumbersList = purchaseManualLotto(numberOfManualLotto);
+        lottoNumbersList.addAll(generateLotto(numberOfAutomaticLotto));
+
         outputView.printLotto(new PurchasedInfo().getPurchasedInfoString(lottoNumbersList));
 
         return lottoNumbersList;
     }
 
+    private List<LottoNumbers> purchaseManualLotto(int count) {
+        return inputView.getUserInputManualLottoNumbers(count)
+                .stream()
+                .map(LottoStringUtils::stringToLottoNumbers)
+                .collect(Collectors.toList());
+    }
+
     private LottoNumbers getWinLottoNumbersFromUser() {
-        return new LottoNumbers(
-                Arrays.stream(inputView.getUserInputLottoNumbers().split(LOTTO_NUMBER_DELIMITER))
-                        .map(LottoNumber::of)
-                        .collect(Collectors.toList()));
+        return stringToLottoNumbers(inputView.getUserInputLottoNumbers());
     }
 
     private LottoNumber getBonusBallFromUser() {

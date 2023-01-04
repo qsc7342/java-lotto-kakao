@@ -25,4 +25,8 @@ public class Payment {
     public double getDividedByDouble(double num) {
         return num / payment;
     }
+
+    public int getSubtractByInt(int num) {
+        return payment - num;
+    }
 }
