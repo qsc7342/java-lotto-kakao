@@ -17,8 +17,8 @@ public class LottoGenerator {
             .collect(Collectors.toList());
 
 
-    public static List<LottoNumbers> generateLotto(int payment) {
-        return IntStream.range(0, payment / LOTTO_PRICE)
+    public static List<LottoNumbers> generateLotto(int count) {
+        return IntStream.range(0, count)
                 .mapToObj(i -> generate())
                 .collect(Collectors.toList());
     }
@@ -29,7 +29,7 @@ public class LottoGenerator {
         return new LottoNumbers(
                 LOTTO_NUMBER_LIST.subList(0, LOTTO_SIZE)
                         .stream()
-                        .map(LottoNumber::new)
+                        .map(LottoNumber::of)
                         .collect(Collectors.toList())
         );
     }

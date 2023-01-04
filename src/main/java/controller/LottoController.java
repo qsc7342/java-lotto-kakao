@@ -28,7 +28,7 @@ public class LottoController {
 
     public void run() {
         Payment payment = new Payment(Integer.parseInt(inputView.getUserInputPayment()));
-        int numberOfLotto = payment.divideByLottoPrice();
+        int numberOfLotto = payment.getDivideByInt(LOTTO_PRICE);
         outputView.printNumberOfLotto(numberOfLotto);
 
         List<LottoNumbers> lottoNumbersList = LottoGenerator.generateLotto(numberOfLotto);

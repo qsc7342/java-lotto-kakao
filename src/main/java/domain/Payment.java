@@ -23,6 +23,6 @@ public class Payment {
     }
 
     public double getDividedByDouble(double num) {
-        return payment / num;
+        return num / payment;
     }
 }

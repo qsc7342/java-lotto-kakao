@@ -16,7 +16,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(int number) {
-        if (lottoNumberCache.containsKey(number)) {
+        if (!lottoNumberCache.containsKey(number)) {
             lottoNumberCache.put(number, new LottoNumber(number));
         }
         return lottoNumberCache.get(number);

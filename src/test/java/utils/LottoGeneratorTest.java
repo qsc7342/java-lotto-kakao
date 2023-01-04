@@ -14,8 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoGeneratorTest {
 
     @Test
-    @DisplayName("로또 제너레이터는 로또의 크기만큼의 숫자를 갖는 로또넘버를 생성한다.")
-    void generate() {
+    void 로또_크기_만큼의_로또넘버를_생성한다() {
         // given
         int payment = 14000;
 

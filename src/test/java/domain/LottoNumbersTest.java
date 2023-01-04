@@ -26,12 +26,12 @@ public class LottoNumbersTest {
     @BeforeEach
     void setUp() {
         lottoNumberList = Arrays.asList(
-                new LottoNumber(31),
-                new LottoNumber(18),
-                new LottoNumber(5),
-                new LottoNumber(22),
-                new LottoNumber(41),
-                new LottoNumber(9)
+                LottoNumber.of(31),
+                LottoNumber.of(18),
+                LottoNumber.of(5),
+                LottoNumber.of(22),
+                LottoNumber.of(41),
+                LottoNumber.of(9)
         );
     }
 
@@ -45,7 +45,7 @@ public class LottoNumbersTest {
     @Test
     void 여섯_개의_숫자_중_중복된_숫자가_존재할_경우_예외가_발생한다() {
         // given
-        lottoNumberList.set(1, new LottoNumber(31));
+        lottoNumberList.set(1, LottoNumber.of(31));
 
         // when, then
         assertThatThrownBy(() -> new LottoNumbers(lottoNumberList))
@@ -66,12 +66,12 @@ public class LottoNumbersTest {
         // given
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
         LottoNumbers sortedLottoNumbers = new LottoNumbers(List.of(
-                new LottoNumber(5),
-                new LottoNumber(9),
-                new LottoNumber(18),
-                new LottoNumber(22),
-                new LottoNumber(31),
-                new LottoNumber(41)
+                LottoNumber.of(5),
+                LottoNumber.of(9),
+                LottoNumber.of(18),
+                LottoNumber.of(22),
+                LottoNumber.of(31),
+                LottoNumber.of(41)
         ));
 
         // then
@@ -90,57 +90,60 @@ public class LottoNumbersTest {
 
     private static Stream<Arguments> provideLottoRank() {
         LottoNumbers firstPlaceLottoNumbers = new LottoNumbers(List.of(
-                new LottoNumber(31),
-                new LottoNumber(18),
-                new LottoNumber(5),
-                new LottoNumber(22),
-                new LottoNumber(41),
-                new LottoNumber(9)
+                LottoNumber.of(31),
+                LottoNumber.of(18),
+                LottoNumber.of(5),
+                LottoNumber.of(22),
+                LottoNumber.of(41),
+                LottoNumber.of(9)
         ));
 
         LottoNumbers secondOrThirdPlaceLottoNumbers = new LottoNumbers(List.of(
-                new LottoNumber(31),
-                new LottoNumber(18),
-                new LottoNumber(5),
-                new LottoNumber(22),
-                new LottoNumber(41),
-                new LottoNumber(1)
+                LottoNumber.of(31),
+                LottoNumber.of(18),
+                LottoNumber.of(5),
+                LottoNumber.of(22),
+                LottoNumber.of(41),
+                LottoNumber.of(1)
         ));
 
         LottoNumbers fourthPlaceLottoNumbers = new LottoNumbers(List.of(
-                new LottoNumber(31),
-                new LottoNumber(18),
-                new LottoNumber(5),
-                new LottoNumber(22),
-                new LottoNumber(2),
-                new LottoNumber(1)
+                LottoNumber.of(31),
+                LottoNumber.of(18),
+                LottoNumber.of(5),
+                LottoNumber.of(22),
+                LottoNumber.of(2),
+                LottoNumber.of(1)
         ));
 
         LottoNumbers fifthPlaceLottoNumbers = new LottoNumbers(List.of(
-                new LottoNumber(31),
-                new LottoNumber(18),
-                new LottoNumber(5),
-                new LottoNumber(3),
-                new LottoNumber(2),
-                new LottoNumber(1)
+                LottoNumber.of(31),
+                LottoNumber.of(18),
+                LottoNumber.of(5),
+                LottoNumber.of(3),
+                LottoNumber.of(2),
+                LottoNumber.of(1)
         ));
 
         LottoNumbers noPlaceLottoNumbers = new LottoNumbers(List.of(
-                new LottoNumber(5),
-                new LottoNumber(6),
-                new LottoNumber(4),
-                new LottoNumber(3),
-                new LottoNumber(2),
-                new LottoNumber(1)
+                LottoNumber.of(5),
+                LottoNumber.of(6),
+                LottoNumber.of(4),
+                LottoNumber.of(3),
+                LottoNumber.of(2),
+                LottoNumber.of(1)
         ));
 
+        LottoNumber bonusBallForSecondPlace = LottoNumber.of(9);
+        LottoNumber bonusBallNotAffect = LottoNumber.of(45);
+
         return Stream.of(
-                Arguments.arguments(firstPlaceLottoNumbers, new LottoNumber(45), Rank.FIRST_PLACE),
-                Arguments.arguments(secondOrThirdPlaceLottoNumbers, new LottoNumber(9), Rank.SECOND_PLACE),
-                Arguments.arguments(secondOrThirdPlaceLottoNumbers, new LottoNumber(45), Rank.THIRD_PLACE),
-                Arguments.arguments(fourthPlaceLottoNumbers, new LottoNumber(45), Rank.FOURTH_PLACE),
-                Arguments.arguments(fifthPlaceLottoNumbers, new LottoNumber(45), Rank.FIFTH_PLACE),
-                Arguments.arguments(noPlaceLottoNumbers, new LottoNumber(45), null)
+                Arguments.arguments(firstPlaceLottoNumbers, bonusBallNotAffect, Rank.FIRST_PLACE),
+                Arguments.arguments(secondOrThirdPlaceLottoNumbers, bonusBallForSecondPlace, Rank.SECOND_PLACE),
+                Arguments.arguments(secondOrThirdPlaceLottoNumbers, bonusBallNotAffect, Rank.THIRD_PLACE),
+                Arguments.arguments(fourthPlaceLottoNumbers, bonusBallNotAffect, Rank.FOURTH_PLACE),
+                Arguments.arguments(fifthPlaceLottoNumbers, bonusBallNotAffect, Rank.FIFTH_PLACE),
+                Arguments.arguments(noPlaceLottoNumbers, bonusBallNotAffect, null)
         );
     }
 }
