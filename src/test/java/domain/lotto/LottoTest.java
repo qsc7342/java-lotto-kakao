@@ -92,8 +92,8 @@ public class LottoTest {
         List<LottoNumbers> lottoNumbersList = List.of(firstPlaceLottoNumbers, secondorThirdPlaceLottoNumbers, fourthPlaceLottoNumbers, fifthPlaceLottoNumbers, noPlaceLottoNumbers);
 
         return Stream.of(
-                Arguments.arguments(lottoNumbersList, LottoNumber.of(1), List.of(1, 1, 0, 1, 1)),
-                Arguments.arguments(lottoNumbersList, LottoNumber.of(33), List.of(1, 0, 1, 1, 1))
+                Arguments.arguments(lottoNumbersList, LottoNumber.of(1), List.of(1, 1, 0, 1, 1, 1)),
+                Arguments.arguments(lottoNumbersList, LottoNumber.of(33), List.of(1, 0, 1, 1, 1, 1))
         );
     }
 

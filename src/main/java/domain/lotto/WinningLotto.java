@@ -7,20 +7,20 @@ import java.util.Optional;
 public class WinningLotto {
     private static final int BONUS_BALL_FLAG = 5;
 
-    private LottoNumbers lottoNumbers;
-    private LottoNumber bonusBall;
+    private final LottoNumbers lottoNumbers;
+    private final LottoNumber bonusBall;
 
     public WinningLotto(LottoNumbers lottoNumbers, LottoNumber bonusBall) {
         this.lottoNumbers = lottoNumbers;
         this.bonusBall = bonusBall;
     }
 
-    public Optional<Rank> getRank(LottoNumbers lottoNumbers) {
+    public Rank getRank(LottoNumbers lottoNumbers) {
         int matchCount = this.lottoNumbers.getMatchedCount(lottoNumbers);
         if(isSecondPlace(lottoNumbers, matchCount)) {
-            return Optional.of(Rank.SECOND_PLACE);
+            return Rank.SECOND_PLACE;
         }
-        return Optional.ofNullable(Rank.findRank(matchCount));
+        return Rank.findRank(matchCount);
     }
 
     private boolean isSecondPlace(LottoNumbers lottoNumbers, int matchCount) {
