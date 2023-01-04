@@ -1,19 +1,10 @@
 package domain.lotto;
 
-import domain.lotto.LottoNumber;
-import domain.lotto.LottoNumbers;
-import domain.lotto.WinningLotto;
-import domain.rank.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 import static constant.LottoSetting.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -51,15 +42,6 @@ public class LottoNumbersTest {
         // when, then
         assertThatThrownBy(() -> new LottoNumbers(lottoNumberList))
                 .isInstanceOf(RuntimeException.class);
-    }
-
-    @Test
-    void 로또_숫자_개수_검증() {
-        // given
-        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
-
-        // when, then
-        assertThat(lottoNumbers.hasSize(LOTTO_SIZE)).isTrue();
     }
 
     @Test

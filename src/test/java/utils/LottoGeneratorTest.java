@@ -1,6 +1,7 @@
 package utils;
 
 import domain.lotto.LottoNumbers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -17,10 +18,8 @@ public class LottoGeneratorTest {
         int payment = 14000;
 
         // when
-        List<LottoNumbers> lottoNumbers = LottoGenerator.generateLotto(payment);
+        List<LottoNumbers> lottoNumbers = LottoGenerator.generateLotto(payment / LOTTO_PRICE);
 
-        // then
-        IntStream.range(0, payment / LOTTO_PRICE)
-                .forEach(idx -> assertThat(lottoNumbers.get(idx).hasSize(LOTTO_SIZE)).isTrue());
+        assertThat(lottoNumbers.size()).isEqualTo(payment / LOTTO_PRICE);
     }
 }

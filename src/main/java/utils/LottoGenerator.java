@@ -16,7 +16,6 @@ public class LottoGenerator {
             .boxed()
             .collect(Collectors.toList());
 
-
     public static List<LottoNumbers> generateLotto(int count) {
         return IntStream.range(0, count)
                 .mapToObj(i -> generate())
