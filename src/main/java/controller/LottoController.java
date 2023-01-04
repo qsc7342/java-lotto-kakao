@@ -6,11 +6,11 @@ import domain.lotto.LottoNumbers;
 import domain.lotto.WinningLotto;
 import domain.payment.Payment;
 import domain.rank.Rank;
+import utils.YieldCalculator;
 import view.InputView;
 import view.OutputView;
 import view.PurchasedInfo;
 import view.WinningStatistics;
-import utils.YieldCalculator;
 import utils.LottoGenerator;
 
 import java.util.Arrays;
@@ -37,8 +37,10 @@ public class LottoController {
 
         LottoNumbers winLottoNumbers = getWinLottoNumbersFromUser();
         LottoNumber bonusBall = getBonusBallFromUser();
-        
-        execute(payment, lottoNumbersList, new WinningLotto(winLottoNumbers, bonusBall));
+
+        Map<Rank, Integer> rankMap = executeLotto(lottoNumbersList, new WinningLotto(winLottoNumbers, bonusBall));
+
+        finishLotto(payment, rankMap);
     }
 
     private List<LottoNumbers> purchaseLotto(Payment payment) {
@@ -51,22 +53,26 @@ public class LottoController {
         return lottoNumbersList;
     }
 
+    private LottoNumbers getWinLottoNumbersFromUser() {
+        return new LottoNumbers(
+                Arrays.stream(inputView.getUserInputLottoNumbers().split(LOTTO_NUMBER_DELIMITER))
+                        .map(LottoNumber::of)
+                        .collect(Collectors.toList()));
+    }
+
     private LottoNumber getBonusBallFromUser() {
         return LottoNumber.of(Integer.parseInt(inputView.getUserInputBonusBallNumbers()));
     }
 
-    public void execute(Payment payment, List<LottoNumbers> lottoNumbersList, WinningLotto winningLotto) {
+    public Map<Rank, Integer> executeLotto(List<LottoNumbers> lottoNumbersList, WinningLotto winningLotto) {
         Lotto lotto = new Lotto(lottoNumbersList);
         Map<Rank, Integer> rankMap = lotto.rankEachLotto(winningLotto);
-        outputView.printStatistics(new WinningStatistics(rankMap).toString());
 
-        outputView.printYield(YieldCalculator.calculate(payment, rankMap));
+        return rankMap;
     }
 
-    private LottoNumbers getWinLottoNumbersFromUser() {
-        return new LottoNumbers(
-                Arrays.stream(inputView.getUserInputLottoNumbers().split(LOTTO_NUMBER_DELIMITER))
-                .map(LottoNumber::of)
-                .collect(Collectors.toList()));
+    private void finishLotto(Payment payment, Map<Rank, Integer> rankMap) {
+        outputView.printStatistics(new WinningStatistics(rankMap).toString());
+        outputView.printYield(YieldCalculator.calculate(payment, rankMap));
     }
 }
