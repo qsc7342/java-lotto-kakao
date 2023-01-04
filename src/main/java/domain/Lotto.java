@@ -11,9 +11,9 @@ public class Lotto {
         this.lottoNumbersList = lottoNumbersList;
     }
 
-    public Map<Rank, Integer> rankEachLotto(LottoNumbers winLottoNumbers, LottoNumber bonusBall) {
+    public Map<Rank, Integer> rankEachLotto(WinningLotto winningLotto) {
         List<Rank> ranks = lottoNumbersList.stream()
-                .map(lottoNumbers -> lottoNumbers.compareWithWinLottoNumbers(winLottoNumbers, bonusBall))
+                .map(lottoNumbers -> winningLotto.getRank(lottoNumbers))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());

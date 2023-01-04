@@ -22,6 +22,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumberCache.get(number);
     }
 
+    public static LottoNumber of(String number) {
+        return of(Integer.parseInt(number));
+    }
+
     private void validateNumber(int number) {
         if(number < MIN_VALUE || number > MAX_VALUE) {
             throw new RuntimeException(INVALID_LOTTO_NUMBER_MESSAGE);

@@ -29,7 +29,7 @@ public class LottoTest {
         ));
 
         // when
-        Map<Rank, Integer> rankMap = lotto.rankEachLotto(winLottoNumbers, bonusBall);
+        Map<Rank, Integer> rankMap = lotto.rankEachLotto(new WinningLotto(winLottoNumbers, bonusBall));
 
         // then
         List<Integer> actualRankCountList = Arrays.stream(Rank.values())

@@ -26,20 +26,11 @@ public class LottoNumbers {
         return lottoNumbers.size() == size;
     }
 
-    public Optional<Rank> compareWithWinLottoNumbers(LottoNumbers winLottoNumbers, LottoNumber bonusBall) {
-        List<LottoNumber> matchedLottoNumbers = new ArrayList<>(lottoNumbers);
-        matchedLottoNumbers.retainAll(winLottoNumbers.lottoNumbers);
-
-        int matchCount = matchedLottoNumbers.size();
-
-        if(isSecondPlace(bonusBall, matchCount)) {
-            return Optional.of(Rank.SECOND_PLACE);
-        }
-        return Optional.ofNullable(Rank.findRank(matchCount));
-    }
-
-    private boolean isSecondPlace(LottoNumber bonusBall, int matchCount) {
-        return matchCount == BONUS_BALL_FLAG && lottoNumbers.contains(bonusBall);
+    public int getMatchedCount(LottoNumbers lottoNumbers) {
+        return this.lottoNumbers.stream()
+                .filter(lottoNumbers.lottoNumbers::contains)
+                .collect(Collectors.toList())
+                .size();
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -71,5 +62,9 @@ public class LottoNumbers {
         return '[' + lottoNumbers.stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(", ")) + ']';
+    }
+
+    public boolean contains(LottoNumber bonusBall) {
+        return lottoNumbers.contains(bonusBall);
     }
 }

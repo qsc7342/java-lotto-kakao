@@ -80,12 +80,12 @@ public class LottoNumbersTest {
 
     @ParameterizedTest
     @MethodSource("provideLottoRank")
-    void 로또_결과에_맞는_랭크를_반환한다(LottoNumbers winLottoNumbers, LottoNumber bonusBall, Rank expected) {
+    void 로또_결과에_맞는_랭크를_반환한다(WinningLotto winningLotto, Rank expected) {
         // given
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
 
         // when, then
-        assertThat(lottoNumbers.compareWithWinLottoNumbers(winLottoNumbers, bonusBall)).isEqualTo(Optional.ofNullable(expected));
+        assertThat(winningLotto.getRank(lottoNumbers)).isEqualTo(Optional.ofNullable(expected));
     }
 
     private static Stream<Arguments> provideLottoRank() {
@@ -138,12 +138,12 @@ public class LottoNumbersTest {
         LottoNumber bonusBallNotAffect = LottoNumber.of(45);
 
         return Stream.of(
-                Arguments.arguments(firstPlaceLottoNumbers, bonusBallNotAffect, Rank.FIRST_PLACE),
-                Arguments.arguments(secondOrThirdPlaceLottoNumbers, bonusBallForSecondPlace, Rank.SECOND_PLACE),
-                Arguments.arguments(secondOrThirdPlaceLottoNumbers, bonusBallNotAffect, Rank.THIRD_PLACE),
-                Arguments.arguments(fourthPlaceLottoNumbers, bonusBallNotAffect, Rank.FOURTH_PLACE),
-                Arguments.arguments(fifthPlaceLottoNumbers, bonusBallNotAffect, Rank.FIFTH_PLACE),
-                Arguments.arguments(noPlaceLottoNumbers, bonusBallNotAffect, null)
+                Arguments.arguments(new WinningLotto(firstPlaceLottoNumbers, bonusBallNotAffect), Rank.FIRST_PLACE),
+                Arguments.arguments(new WinningLotto(secondOrThirdPlaceLottoNumbers, bonusBallForSecondPlace), Rank.SECOND_PLACE),
+                Arguments.arguments(new WinningLotto(secondOrThirdPlaceLottoNumbers, bonusBallNotAffect), Rank.THIRD_PLACE),
+                Arguments.arguments(new WinningLotto(fourthPlaceLottoNumbers, bonusBallNotAffect), Rank.FOURTH_PLACE),
+                Arguments.arguments(new WinningLotto(fifthPlaceLottoNumbers, bonusBallNotAffect), Rank.FIFTH_PLACE),
+                Arguments.arguments(new WinningLotto(noPlaceLottoNumbers, bonusBallNotAffect), null)
         );
     }
 }

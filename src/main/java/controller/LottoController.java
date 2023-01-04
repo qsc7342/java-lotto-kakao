@@ -3,10 +3,10 @@ package controller;
 import domain.*;
 import view.InputView;
 import view.OutputView;
+import view.PurchasedInfo;
 import view.WinningStatistics;
 import utils.YieldCalculator;
 import utils.LottoGenerator;
-import utils.InputValidator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,31 +28,40 @@ public class LottoController {
 
     public void run() {
         Payment payment = new Payment(Integer.parseInt(inputView.getUserInputPayment()));
+        List<LottoNumbers> lottoNumbersList = purchaseLotto(payment);
+
+        LottoNumbers winLottoNumbers = getWinLottoNumbersFromUser();
+        LottoNumber bonusBall = getBonusBallFromUser();
+        
+        execute(payment, lottoNumbersList, new WinningLotto(winLottoNumbers, bonusBall));
+    }
+
+    private List<LottoNumbers> purchaseLotto(Payment payment) {
         int numberOfLotto = payment.getDivideByInt(LOTTO_PRICE);
         outputView.printNumberOfLotto(numberOfLotto);
 
         List<LottoNumbers> lottoNumbersList = LottoGenerator.generateLotto(numberOfLotto);
-        String purchasedLotto = lottoNumbersList.stream()
-                .map(LottoNumbers::toString)
-                .collect(Collectors.joining("\n"));
-        outputView.printLotto(purchasedLotto);
+        outputView.printLotto(new PurchasedInfo().getPurchasedInfoString(lottoNumbersList));
 
-        execute(payment, lottoNumbersList);
+        return lottoNumbersList;
     }
 
-    public void execute(Payment payment, List<LottoNumbers> lottoNumbersList) {
-        LottoNumbers winLottoNumbers = new LottoNumbers(Arrays.stream(inputView.getUserInputLottoNumbers().split(LOTTO_NUMBER_DELIMITER))
-                .mapToInt(Integer::parseInt)
-                .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList()));
+    private LottoNumber getBonusBallFromUser() {
+        return LottoNumber.of(Integer.parseInt(inputView.getUserInputBonusBallNumbers()));
+    }
 
-        LottoNumber bonusBall = LottoNumber.of(Integer.parseInt(inputView.getUserInputBonusBallNumbers()));
-
+    public void execute(Payment payment, List<LottoNumbers> lottoNumbersList, WinningLotto winningLotto) {
         Lotto lotto = new Lotto(lottoNumbersList);
-        Map<Rank, Integer> rankMap = lotto.rankEachLotto(winLottoNumbers, bonusBall);
-
+        Map<Rank, Integer> rankMap = lotto.rankEachLotto(winningLotto);
         outputView.printStatistics(new WinningStatistics(rankMap).toString());
+
         outputView.printYield(YieldCalculator.calculate(payment, rankMap));
     }
 
+    private LottoNumbers getWinLottoNumbersFromUser() {
+        return new LottoNumbers(
+                Arrays.stream(inputView.getUserInputLottoNumbers().split(LOTTO_NUMBER_DELIMITER))
+                .map(LottoNumber::of)
+                .collect(Collectors.toList()));
+    }
 }
