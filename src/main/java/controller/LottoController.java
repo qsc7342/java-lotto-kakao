@@ -66,9 +66,8 @@ public class LottoController {
 
     public Map<Rank, Integer> executeLotto(List<LottoNumbers> lottoNumbersList, WinningLotto winningLotto) {
         Lotto lotto = new Lotto(lottoNumbersList);
-        Map<Rank, Integer> rankMap = lotto.rankEachLotto(winningLotto);
 
-        return rankMap;
+        return lotto.rankEachLotto(winningLotto);
     }
 
     private void finishLotto(Payment payment, Map<Rank, Integer> rankMap) {
