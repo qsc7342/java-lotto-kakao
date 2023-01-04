@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ public class LottoTest {
 
     @ParameterizedTest
     @MethodSource("provideLotto")
-    void 여러_장의_로또_당첨_등수를_계산한다(List<LottoNumbers> lottoNumbersList, LottoNumber bonusBall, List<Integer> expectedRankCountList) {
+    void 여러_장의_로또_당첨_등수를_계산한다(List<LottoNumbers> lottoNumbersList, LottoNumber bonusBall, Map<Rank, Integer> expectedRankCountList) {
         // given
         Lotto lotto = new Lotto(lottoNumbersList);
         LottoNumbers winLottoNumbers = new LottoNumbers(List.of(
@@ -29,14 +30,8 @@ public class LottoTest {
                 LottoNumber.of(9)
         ));
 
-        // when
-        Map<Rank, Integer> rankMap = lotto.rankEachLotto(new WinningLotto(winLottoNumbers, bonusBall));
-
-        // then
-        List<Integer> actualRankCountList = Arrays.stream(Rank.values())
-                .map(rankMap::get)
-                .collect(Collectors.toList());
-        assertThat(actualRankCountList).isEqualTo(expectedRankCountList);
+        // when, then
+        assertThat(lotto.rankEachLotto(new WinningLotto(winLottoNumbers, bonusBall))).isEqualTo(expectedRankCountList);
     }
 
     private static Stream<Arguments> provideLotto() {
@@ -87,9 +82,27 @@ public class LottoTest {
 
         List<LottoNumbers> lottoNumbersList = List.of(firstPlaceLottoNumbers, secondorThirdPlaceLottoNumbers, fourthPlaceLottoNumbers, fifthPlaceLottoNumbers, noPlaceLottoNumbers);
 
+        Map<Rank, Integer> expected1 = Map.of(
+                Rank.FIRST_PLACE, 1,
+                Rank.SECOND_PLACE, 1,
+                Rank.THIRD_PLACE, 0,
+                Rank.FOURTH_PLACE, 1,
+                Rank.FIFTH_PLACE, 1,
+                Rank.NOTHING, 1
+        );
+
+        Map<Rank, Integer> expected2 = Map.of(
+                Rank.FIRST_PLACE, 1,
+                Rank.SECOND_PLACE, 0,
+                Rank.THIRD_PLACE, 1,
+                Rank.FOURTH_PLACE, 1,
+                Rank.FIFTH_PLACE, 1,
+                Rank.NOTHING, 1
+        );
+
         return Stream.of(
-                Arguments.arguments(lottoNumbersList, LottoNumber.of(1), List.of(1, 1, 0, 1, 1, 1)),
-                Arguments.arguments(lottoNumbersList, LottoNumber.of(33), List.of(1, 0, 1, 1, 1, 1))
+                Arguments.arguments(lottoNumbersList, LottoNumber.of(1), expected1),
+                Arguments.arguments(lottoNumbersList, LottoNumber.of(33), expected2)
         );
     }
 }

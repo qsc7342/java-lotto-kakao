@@ -18,10 +18,6 @@ public class Payment {
         }
     }
 
-    public int getDivideByInt(int num) {
-        return payment / LOTTO_PRICE;
-    }
-
     public double getDividedByDouble(double num) {
         return num / payment;
     }

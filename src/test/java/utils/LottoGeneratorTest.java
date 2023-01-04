@@ -1,6 +1,7 @@
 package utils;
 
 import domain.lotto.LottoNumbers;
+import domain.payment.Payment;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,11 +16,11 @@ public class LottoGeneratorTest {
     @Test
     void 로또_크기_만큼의_로또넘버를_생성한다() {
         // given
-        int payment = 14000;
-
+        Payment payment = new Payment(14000);
+        int count = payment.getSubtractByInt(LOTTO_PRICE);
         // when
-        List<LottoNumbers> lottoNumbers = LottoGenerator.generateLotto(payment / LOTTO_PRICE);
+        List<LottoNumbers> lottoNumbers = LottoGenerator.generateLotto(count);
 
-        assertThat(lottoNumbers.size()).isEqualTo(payment / LOTTO_PRICE);
+        assertThat(lottoNumbers.size()).isEqualTo(count);
     }
 }
