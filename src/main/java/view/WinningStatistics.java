@@ -22,6 +22,7 @@ public class WinningStatistics {
     @Override
     public String toString() {
         List<Rank> ranks = Arrays.stream(Rank.values())
+                .filter(rank -> !rank.equals(Rank.NOTHING))
                 .collect(Collectors.toList());
         Collections.reverse(ranks);
 
