@@ -1,9 +1,6 @@
 package controller;
 
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.LottoNumbers;
-import domain.Rank;
+import domain.*;
 import view.InputView;
 import view.OutputView;
 import view.WinningStatistics;
@@ -23,20 +20,18 @@ public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final InputValidator inputValidator;
 
     public LottoController() {
         inputView = new InputView();
         outputView = new OutputView();
-        inputValidator = new InputValidator();
     }
 
     public void run() {
-        int payment = Integer.parseInt(inputView.getUserInputPayment());
-        inputValidator.validatePayment(payment);
-        outputView.printNumberOfLotto(payment / LOTTO_PRICE);
+        Payment payment = new Payment(Integer.parseInt(inputView.getUserInputPayment()));
+        int numberOfLotto = payment.divideByLottoPrice();
+        outputView.printNumberOfLotto(numberOfLotto);
 
-        List<LottoNumbers> lottoNumbersList = LottoGenerator.generateLotto(payment);
+        List<LottoNumbers> lottoNumbersList = LottoGenerator.generateLotto(numberOfLotto);
         String purchasedLotto = lottoNumbersList.stream()
                 .map(LottoNumbers::toString)
                 .collect(Collectors.joining("\n"));
@@ -45,13 +40,13 @@ public class LottoController {
         execute(payment, lottoNumbersList);
     }
 
-    public void execute(int payment, List<LottoNumbers> lottoNumbersList) {
+    public void execute(Payment payment, List<LottoNumbers> lottoNumbersList) {
         LottoNumbers winLottoNumbers = new LottoNumbers(Arrays.stream(inputView.getUserInputLottoNumbers().split(LOTTO_NUMBER_DELIMITER))
                 .mapToInt(Integer::parseInt)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()));
 
-        LottoNumber bonusBall = new LottoNumber(Integer.parseInt(inputView.getUserInputBonusBallNumbers()));
+        LottoNumber bonusBall = LottoNumber.of(Integer.parseInt(inputView.getUserInputBonusBallNumbers()));
 
         Lotto lotto = new Lotto(lottoNumbersList);
         Map<Rank, Integer> rankMap = lotto.rankEachLotto(winLottoNumbers, bonusBall);
