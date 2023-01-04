@@ -2,9 +2,9 @@ package domain.payment;
 
 import static constant.ExceptionMessage.INVALID_LOTTO_PAYMENT_MESSAGE;
 import static constant.LottoSetting.LOTTO_PRICE;
-import static constant.LottoSetting.MIN_LOTTO_PAYMENT;
 
 public class Payment {
+    public static final int MIN_LOTTO_PAYMENT = 5000;
     private final int payment;
 
     public Payment(int payment) {
