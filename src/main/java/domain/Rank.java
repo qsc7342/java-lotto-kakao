@@ -23,10 +23,6 @@ public enum Rank {
         return prize;
     }
 
-    public int getMatchCount() {
-        return matchCount == SECOND_PLACE.matchCount ? THIRD_PLACE.matchCount : matchCount;
-    }
-
     public static Rank findRank(int matchCount) {
         return Arrays.stream(values())
                 .filter(rank -> rank.matchCount == matchCount)
