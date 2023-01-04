@@ -1,8 +1,9 @@
-package domain;
+package domain.lotto;
 
-import domain.LottoNumber;
-import domain.LottoNumbers;
-import domain.Rank;
+import domain.lotto.LottoNumber;
+import domain.lotto.LottoNumbers;
+import domain.lotto.WinningLotto;
+import domain.rank.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

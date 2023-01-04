@@ -1,6 +1,6 @@
 package view;
 
-import domain.Rank;
+import domain.rank.Rank;
 
 import java.util.Arrays;
 import java.util.Collections;

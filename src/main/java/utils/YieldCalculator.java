@@ -1,7 +1,7 @@
 package utils;
 
-import domain.Payment;
-import domain.Rank;
+import domain.payment.Payment;
+import domain.rank.Rank;
 
 import java.util.Map;
 

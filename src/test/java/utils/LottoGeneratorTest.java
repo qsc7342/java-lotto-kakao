@@ -1,9 +1,7 @@
 package utils;
 
-import domain.LottoNumbers;
-import org.junit.jupiter.api.DisplayName;
+import domain.lotto.LottoNumbers;
 import org.junit.jupiter.api.Test;
-import utils.LottoGenerator;
 
 import java.util.List;
 import java.util.stream.IntStream;

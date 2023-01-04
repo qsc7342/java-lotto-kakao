@@ -1,6 +1,6 @@
 package view;
 
-import domain.LottoNumbers;
+import domain.lotto.LottoNumbers;
 
 import java.util.List;
 import java.util.stream.Collectors;

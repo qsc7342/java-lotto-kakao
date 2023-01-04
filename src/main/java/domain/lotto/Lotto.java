@@ -1,4 +1,6 @@
-package domain;
+package domain.lotto;
+
+import domain.rank.Rank;
 
 import java.util.*;
 import java.util.stream.Collectors;

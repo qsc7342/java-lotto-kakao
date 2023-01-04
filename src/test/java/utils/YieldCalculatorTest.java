@@ -1,8 +1,7 @@
 package utils;
 
-import domain.Payment;
-import domain.Rank;
-import org.junit.jupiter.api.DisplayName;
+import domain.payment.Payment;
+import domain.rank.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;

@@ -1,7 +1,6 @@
-package domain;
+package domain.lotto;
 
-import domain.LottoNumber;
-import org.junit.jupiter.api.DisplayName;
+import domain.lotto.LottoNumber;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 

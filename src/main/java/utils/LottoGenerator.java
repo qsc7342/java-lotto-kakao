@@ -1,7 +1,7 @@
 package utils;
 
-import domain.LottoNumber;
-import domain.LottoNumbers;
+import domain.lotto.LottoNumber;
+import domain.lotto.LottoNumbers;
 
 import java.util.Collections;
 import java.util.List;

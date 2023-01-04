@@ -1,4 +1,4 @@
-package domain;
+package domain.payment;
 
 import static constant.ExceptionMessage.INVALID_LOTTO_PAYMENT_MESSAGE;
 import static constant.LottoSetting.LOTTO_PRICE;

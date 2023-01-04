@@ -1,9 +1,7 @@
-package domain;
+package domain.lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static constant.ExceptionMessage.NOT_UNIQUE_LOTTO_NUMBER_MESSAGE;
@@ -31,6 +29,10 @@ public class LottoNumbers {
                 .filter(lottoNumbers.lottoNumbers::contains)
                 .collect(Collectors.toList())
                 .size();
+    }
+
+    public boolean contains(LottoNumber bonusBall) {
+        return lottoNumbers.contains(bonusBall);
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -62,9 +64,5 @@ public class LottoNumbers {
         return '[' + lottoNumbers.stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(", ")) + ']';
-    }
-
-    public boolean contains(LottoNumber bonusBall) {
-        return lottoNumbers.contains(bonusBall);
     }
 }

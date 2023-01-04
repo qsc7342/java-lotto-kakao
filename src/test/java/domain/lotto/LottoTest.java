@@ -1,5 +1,10 @@
-package domain;
+package domain.lotto;
 
+import domain.lotto.Lotto;
+import domain.lotto.LottoNumber;
+import domain.lotto.LottoNumbers;
+import domain.lotto.WinningLotto;
+import domain.rank.Rank;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
