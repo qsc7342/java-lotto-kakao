@@ -31,7 +31,7 @@ public class LottoController {
     }
 
     public void run() {
-        Payment payment = new Payment(Integer.parseInt(inputView.getUserInputPayment()));
+        Payment payment = new Payment(inputView.getUserInputPayment());
         List<LottoNumbers> lottoNumbersList = purchaseLotto(payment);
 
         LottoNumbers winLottoNumbers = getWinLottoNumbersFromUser();
@@ -67,7 +67,7 @@ public class LottoController {
     }
 
     private LottoNumber getBonusBallFromUser() {
-        return LottoNumber.of(Integer.parseInt(inputView.getUserInputBonusBallNumbers()));
+        return LottoNumber.of(inputView.getUserInputBonusBallNumbers());
     }
 
     public Map<Rank, Integer> executeLotto(List<LottoNumbers> lottoNumbersList, WinningLotto winningLotto) {

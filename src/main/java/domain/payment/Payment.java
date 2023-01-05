@@ -11,6 +11,10 @@ public class Payment {
         this.payment = payment;
     }
 
+    public Payment(String payment) {
+        this(Integer.parseInt(payment));
+    }
+
     public void validate(int payment) {
         if (payment < MIN_LOTTO_PAYMENT) {
             throw new RuntimeException(INVALID_LOTTO_PAYMENT_MESSAGE);
