@@ -1,10 +1,13 @@
 package domain.lotto;
 
+import constant.ExceptionMessage;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 import static constant.ExceptionMessage.*;
+import static constant.ExceptionMessage.Lotto.INVALID_LOTTO_NUMBER_MESSAGE;
 import static constant.LottoSetting.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {

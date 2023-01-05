@@ -1,10 +1,12 @@
 package domain.lotto;
 
+import constant.ExceptionMessage;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static constant.ExceptionMessage.NOT_UNIQUE_LOTTO_NUMBER_MESSAGE;
+import static constant.ExceptionMessage.Lotto.NOT_UNIQUE_LOTTO_NUMBER_MESSAGE;
 import static constant.LottoSetting.*;
 
 public class LottoNumbers {
