@@ -2,11 +2,9 @@ package utils;
 
 import domain.lotto.LottoNumbers;
 import domain.payment.Payment;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
 import static constant.LottoSetting.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,7 +15,7 @@ public class LottoGeneratorTest {
     void 로또_크기_만큼의_로또넘버를_생성한다() {
         // given
         Payment payment = new Payment(14000);
-        int count = payment.getSubtractByInt(LOTTO_PRICE);
+        int count = payment.valueOfSubtractByInt(LOTTO_PRICE);
         // when
         List<LottoNumbers> lottoNumbers = LottoGenerator.generateLotto(count);
 

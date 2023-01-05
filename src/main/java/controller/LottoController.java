@@ -44,7 +44,7 @@ public class LottoController {
 
     private List<LottoNumbers> purchaseLotto(Payment payment) {
         int numberOfManualLotto = Integer.parseInt(inputView.getUserInputManualLottoCount());
-        int numberOfAutomaticLotto = payment.getSubtractByInt(numberOfManualLotto * LOTTO_PRICE) / LOTTO_PRICE;
+        int numberOfAutomaticLotto = payment.valueOfSubtractByInt(numberOfManualLotto * LOTTO_PRICE) / LOTTO_PRICE;
         outputView.printNumberOfLotto(numberOfManualLotto, numberOfAutomaticLotto);
 
         List<LottoNumbers> lottoNumbersList = purchaseManualLotto(numberOfManualLotto);

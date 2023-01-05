@@ -1,7 +1,6 @@
 package domain.payment;
 
 import static constant.ExceptionMessage.INVALID_LOTTO_PAYMENT_MESSAGE;
-import static constant.LottoSetting.LOTTO_PRICE;
 
 public class Payment {
     public static final int MIN_LOTTO_PAYMENT = 5000;
@@ -18,11 +17,11 @@ public class Payment {
         }
     }
 
-    public double getDividedByDouble(double num) {
+    public double valueOfDividedByDouble(double num) {
         return num / payment;
     }
 
-    public int getSubtractByInt(int num) {
+    public int valueOfSubtractByInt(int num) {
         return payment - num;
     }
 }

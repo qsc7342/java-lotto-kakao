@@ -13,6 +13,6 @@ public class YieldCalculator {
                 .mapToLong(rank -> rank.getPrize() * rankMap.get(rank))
                 .sum();
 
-        return Math.floor(payment.getDividedByDouble(sum) * 100) / 100;
+        return Math.floor(payment.valueOfDividedByDouble(sum) * 100) / 100;
     }
 }
