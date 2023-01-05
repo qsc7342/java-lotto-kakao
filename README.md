@@ -52,3 +52,5 @@
 - [x] 로또 수동 입력 구매 구현
 - [x] Lotto StringUtils 구현
 - [x] StringUtils 테스트 구현
+- [x] Payment 입력 예외처리 진행
+- [x] 로또 번호 입력 예외처리 진행

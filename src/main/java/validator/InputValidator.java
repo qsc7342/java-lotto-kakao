@@ -6,7 +6,7 @@ import static constant.ExceptionMessage.Input.INVALID_PAYMENT_INPUT;
 public class InputValidator {
     private static final String isNumericRegex = "^[0-9]+$";
     private static final String LottoNumbersRegex = "^\\d{1,2}, \\d{1,2}, \\d{1,2}, \\d{1,2}, \\d{1,2}, \\d{1,2}$";
-    public String validatePaymentInput(String input) {
+    public String validateIsNumeric(String input) {
         if(!input.matches(isNumericRegex)) {
             throw new RuntimeException(INVALID_PAYMENT_INPUT);
         }

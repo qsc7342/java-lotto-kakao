@@ -25,7 +25,7 @@ public class InputView {
 
     public String getUserInputPayment() {
         System.out.println(PAYMENT_INPUT_MESSAGE);
-        return inputValidator.validatePaymentInput(scanner.nextLine());
+        return inputValidator.validateIsNumeric(scanner.nextLine());
     }
 
     public String getUserInputLottoNumbers() {
@@ -35,18 +35,18 @@ public class InputView {
 
     public String getUserInputBonusBallNumbers() {
         System.out.println(BONUS_BALL_INPUT_MESSAGE);
-        return scanner.nextLine();
+        return inputValidator.validateIsNumeric(scanner.nextLine());
     }
 
     public String getUserInputManualLottoCount() {
         System.out.println(PURCHASE_MANUAL_LOTTO_MESSAGE);
-        return scanner.nextLine();
+        return inputValidator.validateIsNumeric(scanner.nextLine());
     }
 
     public List<String> getUserInputManualLottoNumbers(int count) {
         System.out.println(MANUAL_LOTTO_NUMBER_INPUT_MESSAGE);
         return IntStream.range(0, count)
-                .mapToObj(i -> scanner.nextLine())
+                .mapToObj(i -> inputValidator.validateLottoNumbersInput(scanner.nextLine()))
                 .collect(Collectors.toList());
     }
 }
