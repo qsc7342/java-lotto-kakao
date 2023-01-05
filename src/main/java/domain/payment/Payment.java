@@ -1,6 +1,7 @@
 package domain.payment;
 
-import static constant.ExceptionMessage.INVALID_LOTTO_PAYMENT_MESSAGE;
+
+import static constant.ExceptionMessage.Lotto.INVALID_LOTTO_PAYMENT_MESSAGE;
 
 public class Payment {
     public static final int MIN_LOTTO_PAYMENT = 5000;
