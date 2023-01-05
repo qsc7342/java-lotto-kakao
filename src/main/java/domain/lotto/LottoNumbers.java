@@ -1,6 +1,5 @@
 package domain.lotto;
 
-
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -9,9 +8,6 @@ import static constant.ExceptionMessage.Lotto.NOT_UNIQUE_LOTTO_NUMBER_MESSAGE;
 import static constant.LottoSetting.*;
 
 public class LottoNumbers {
-
-    private static final int BONUS_BALL_FLAG = 5;
-
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -20,11 +16,7 @@ public class LottoNumbers {
                 .sorted()
                 .collect(Collectors.toList());
     }
-
-    public boolean hasSize(int size) {
-        return lottoNumbers.size() == size;
-    }
-
+    
     public int getMatchedCount(LottoNumbers lottoNumbers) {
         return this.lottoNumbers.stream()
                 .filter(lottoNumbers.lottoNumbers::contains)
