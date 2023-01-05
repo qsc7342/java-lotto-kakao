@@ -85,7 +85,6 @@ public class LottoTest {
         Map<Rank, Integer> expected1 = Map.of(
                 Rank.FIRST_PLACE, 1,
                 Rank.SECOND_PLACE, 1,
-                Rank.THIRD_PLACE, 0,
                 Rank.FOURTH_PLACE, 1,
                 Rank.FIFTH_PLACE, 1,
                 Rank.NOTHING, 1
@@ -93,7 +92,6 @@ public class LottoTest {
 
         Map<Rank, Integer> expected2 = Map.of(
                 Rank.FIRST_PLACE, 1,
-                Rank.SECOND_PLACE, 0,
                 Rank.THIRD_PLACE, 1,
                 Rank.FOURTH_PLACE, 1,
                 Rank.FIFTH_PLACE, 1,

@@ -12,6 +12,7 @@ public class WinningStatistics {
 
     private static final String STATISTIC_FORMAT = "%d개 일치 (%d원) - %d개";
     private static final String SECOND_PLACE_STATISTIC_FORMAT = "%d개, 보너스 볼 일치 (%d원) - %d개";
+    private static final int NO_COUNT = 0;
 
     private final Map<Rank, Integer> rankMap;
 
@@ -33,8 +34,8 @@ public class WinningStatistics {
 
     private String getStatisticFormat(Rank rank) {
         return rank == Rank.SECOND_PLACE
-                ? String.format(SECOND_PLACE_STATISTIC_FORMAT, rank.getMatchCount(), rank.getPrize(), rankMap.get(rank))
-                : String.format(STATISTIC_FORMAT, rank.getMatchCount(), rank.getPrize(), rankMap.get(rank));
+                ? String.format(SECOND_PLACE_STATISTIC_FORMAT, rank.getMatchCount(), rank.getPrize(), rankMap.getOrDefault(rank, NO_COUNT))
+                : String.format(STATISTIC_FORMAT, rank.getMatchCount(), rank.getPrize(), rankMap.getOrDefault(rank, NO_COUNT));
     }
 
 }
