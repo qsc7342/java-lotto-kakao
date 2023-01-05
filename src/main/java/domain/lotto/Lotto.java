@@ -2,7 +2,6 @@ package domain.lotto;
 
 import domain.rank.Rank;
 
-import javax.swing.text.html.Option;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;

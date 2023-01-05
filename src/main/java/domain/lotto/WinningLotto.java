@@ -2,7 +2,6 @@ package domain.lotto;
 
 import domain.rank.Rank;
 
-import java.util.Optional;
 
 public class WinningLotto {
     private static final int BONUS_BALL_FLAG = 5;
