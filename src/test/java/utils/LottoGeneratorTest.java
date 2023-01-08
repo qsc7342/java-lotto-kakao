@@ -1,12 +1,10 @@
 package utils;
 
-import domain.LottoNumbers;
-import org.junit.jupiter.api.DisplayName;
+import domain.lotto.LottoNumbers;
+import domain.payment.Payment;
 import org.junit.jupiter.api.Test;
-import utils.LottoGenerator;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
 import static constant.LottoSetting.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,16 +12,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoGeneratorTest {
 
     @Test
-    @DisplayName("로또 제너레이터는 로또의 크기만큼의 숫자를 갖는 로또넘버를 생성한다.")
-    void generate() {
+    void 로또_크기_만큼의_로또넘버를_생성한다() {
         // given
-        int payment = 14000;
-
+        Payment payment = new Payment(14000);
+        int count = payment.valueOfSubtractByInt(LOTTO_PRICE);
         // when
-        List<LottoNumbers> lottoNumbers = LottoGenerator.generateLotto(payment);
+        List<LottoNumbers> lottoNumbers = LottoGenerator.generateLotto(count);
 
-        // then
-        IntStream.range(0, payment / LOTTO_PRICE)
-                .forEach(idx -> assertThat(lottoNumbers.get(idx).hasSize(LOTTO_SIZE)).isTrue());
+        assertThat(lottoNumbers.size()).isEqualTo(count);
     }
 }

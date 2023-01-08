@@ -1,18 +1,13 @@
-package domain;
+package domain.lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static constant.ExceptionMessage.NOT_UNIQUE_LOTTO_NUMBER_MESSAGE;
+import static constant.ExceptionMessage.Lotto.NOT_UNIQUE_LOTTO_NUMBER_MESSAGE;
 import static constant.LottoSetting.*;
 
 public class LottoNumbers {
-
-    private static final int BONUS_BALL_FLAG = 5;
-
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -21,25 +16,16 @@ public class LottoNumbers {
                 .sorted()
                 .collect(Collectors.toList());
     }
-
-    public boolean hasSize(int size) {
-        return lottoNumbers.size() == size;
+    
+    public int getMatchedCount(LottoNumbers lottoNumbers) {
+        return this.lottoNumbers.stream()
+                .filter(lottoNumbers.lottoNumbers::contains)
+                .collect(Collectors.toList())
+                .size();
     }
 
-    public Optional<Rank> compareWithWinLottoNumbers(LottoNumbers winLottoNumbers, LottoNumber bonusBall) {
-        List<LottoNumber> matchedLottoNumbers = new ArrayList<>(lottoNumbers);
-        matchedLottoNumbers.retainAll(winLottoNumbers.lottoNumbers);
-
-        int matchCount = matchedLottoNumbers.size();
-
-        if(isSecondPlace(bonusBall, matchCount)) {
-            return Optional.of(Rank.SECOND_PLACE);
-        }
-        return Optional.ofNullable(Rank.findRank(matchCount));
-    }
-
-    private boolean isSecondPlace(LottoNumber bonusBall, int matchCount) {
-        return matchCount == BONUS_BALL_FLAG && lottoNumbers.contains(bonusBall);
+    public boolean contains(LottoNumber bonusBall) {
+        return lottoNumbers.contains(bonusBall);
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {

@@ -29,3 +29,28 @@
 - 당첨 통계를 출력한다.
   - 당첨된 로또의 개수를 등수 별로 출력한다.
   - 총 수익률을 출력한다.
+
+### 1차 리팩토링 진행
+- [x] 정적 팩토리 메소드 및 캐싱 적용 (LottoNumber)
+- [x] 2위의 matchCount를 -1에서 5로 변경
+- [x] Payment 원시값 포장
+- [x] TC 메소드명 통일
+- [x] WinningLotto 구현을 통한 구조 개선
+- [x] Optional 제거 (Nothing Rank 추가)
+- [x] 컨트롤러 메소드 분리
+- [x] 통계에 NOTHING은 출력되지 않도록 변경
+- [x] hasSize 제거
+- [x] WinningLottoTest 분리
+- [x] RankTest 추가
+- [x] 공통적으로 사용하지 않는 상수는 해당 클래스 위로 이동 
+- [x] 테스트에만 사용되는 메소드 삭제 (hasSize)
+- [x] 테스트에 존재하는 비즈니스 로직 제거
+- [x] groupingBy 적용
+- [x] Payment 부생성자 적용
+ 
+### 2차 기능 구현 진행
+- [x] 로또 수동 입력 구매 구현
+- [x] Lotto StringUtils 구현
+- [x] StringUtils 테스트 구현
+- [x] Payment 입력 예외처리 진행
+- [x] 로또 번호 입력 예외처리 진행

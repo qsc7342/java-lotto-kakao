@@ -1,7 +1,5 @@
-package domain;
+package domain.lotto;
 
-import domain.LottoNumber;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -10,18 +8,16 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoNumberTest {
     @ParameterizedTest
-    @DisplayName("1 ~ 45번 사이의 값을 갖는 로또넘버는 생성할 수 있다.")
     @ValueSource(ints = {24, 33, 41, 5})
-    void validLottoNumber(int number) {
-        assertThatCode(() -> new LottoNumber(number))
+    void 올바른_범위의_로또넘버는_생성_가능하다(int number) {
+        assertThatCode(() -> LottoNumber.of(number))
                 .doesNotThrowAnyException();
     }
 
     @ParameterizedTest
-    @DisplayName("범위 밖의 값을 갖는 로또넘버는 생성할 수 없다.")
     @ValueSource(ints = {0, 46})
-    void invalidLottoNumber(int number) {
-        assertThatThrownBy(() -> new LottoNumber(number))
+    void 범위_밖의_로또넘버는_생성_불가능하다(int number) {
+        assertThatThrownBy(() -> LottoNumber.of(number))
                 .isInstanceOf(RuntimeException.class);
     }
 }
